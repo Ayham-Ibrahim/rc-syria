@@ -1,13 +1,13 @@
 <?php
 
-namespace {{ namespace }};
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 
-class {{ class }} extends Model
+class ApplicationSetting extends Model
 {
     use HasFactory,SoftDeletes;
 
@@ -17,7 +17,11 @@ class {{ class }} extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        //
+        'name',
+        'logo',
+        'description',
+        'facebook',
+        'youtube'
     ];
 
     /**

@@ -1,13 +1,14 @@
 <?php
 
-namespace {{ namespace }};
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 
-class {{ class }} extends Model
+class MedicalPoint extends Model
 {
     use HasFactory,SoftDeletes;
 
@@ -17,7 +18,9 @@ class {{ class }} extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        //
+        'id',
+        'name',
+        'address',
     ];
 
     /**
@@ -28,4 +31,14 @@ class {{ class }} extends Model
     protected $casts = [
         //
     ];
+
+    /**
+     * Get all of the doctors for the MedicalPoint
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function doctors(): HasMany
+    {
+        return $this->hasMany(Doctor::class, 'medical_point_id', 'id');
+    }
 }

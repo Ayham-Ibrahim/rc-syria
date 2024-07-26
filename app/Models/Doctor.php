@@ -1,13 +1,14 @@
 <?php
 
-namespace {{ namespace }};
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 
-class {{ class }} extends Model
+class Doctor extends Model
 {
     use HasFactory,SoftDeletes;
 
@@ -17,7 +18,10 @@ class {{ class }} extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        //
+        'id',
+        'medical_point_id',
+        'name',
+        'specialis'
     ];
 
     /**
@@ -28,4 +32,14 @@ class {{ class }} extends Model
     protected $casts = [
         //
     ];
+
+    /**
+     * Get the medical_point that owns the Doctor
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function medical_point(): BelongsTo
+    {
+        return $this->belongsTo(MedicalPoint::class, 'medical_point_id');
+    }
 }

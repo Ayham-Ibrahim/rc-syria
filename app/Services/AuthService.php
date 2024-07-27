@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class AuthService
 {
@@ -15,6 +16,15 @@ class AuthService
             'password' => Hash::make($data['password']),
         ]);
         $token = $user->createToken('authToken')->plainTextToken;
+
+        // prepare message
+        $data['email'] = $user->email;
+        $data['body']  = "Thank you for joining with us";
+        // send mail to user
+        Mail::send('emails.notification', ['data' => $data], function ($message) use ($data) {
+            $message->to($data['email'])->subject($data['body']);
+        });
+
         return [
             'status' => 'success',
             'message' => 'User created successfully',
@@ -26,7 +36,7 @@ class AuthService
 
 
     public function login(array $credentials) {
-        
+
         if (!Auth::attempt($credentials)) {
             return response()->json([
                 'message' => 'Invalid login details'

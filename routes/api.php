@@ -1,11 +1,17 @@
 <?php
 
+use App\Http\Controllers\ApplicationSettingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserInfoController;
 use App\Http\Controllers\ReceivingPointController;
+
+use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\MedicalPointController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,12 +24,12 @@ use App\Http\Controllers\ReceivingPointController;
 |
 */
 
- /**
+/**
  * Auth Routes
  *
  * These routes handle user authentication, including login, registration, and logout.
-*/
-Route::post('/register',[AuthController::class,'register']);
+ */
+Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
 
@@ -41,6 +47,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
  * These routes handle Auth user  operations (Admin and users).
  */
 Route::middleware('auth:sanctum')->group(function () {
+
 
     // handle logout method
     Route::post('/logout', [AuthController::class, 'logout']);
@@ -77,6 +84,33 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
 
+
+
+    /**
+     * Medical Point Management Routes
+     *
+     * These routes handle Medical Point management operations.
+     */
+    Route::controller(MedicalPointController::class)->group(function () {
+        Route::get('get-all-medical-points', 'index');
+        Route::get('get-medical-points/{medicalPoint}', 'show');
+    });
+
+    /**
+     * Doctor Management Routes
+     *
+     * These routes handle Doctor management operations.
+     */
+    Route::controller(DoctorController::class)->group(function () {
+        Route::get('get-all-doctors', 'index');
+        Route::get('get-doctors/{doctor}', 'show');
+    });
+
+    /**
+     * Application Setting Management Route
+     *
+     */
+    Route::get('get-application-setting', [ApplicationSettingController::class, 'show']);
 
 });
 
@@ -120,6 +154,31 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
         Route::delete('delete-category/{category}', 'destroy');
     });
 
+
+     * Medical Point Management Routes
+     *
+     * These routes handle Medical Point management operations.
+     */
+    Route::controller(MedicalPointController::class)->group(function () {
+        Route::post('create-medical-points', 'store');
+        Route::put('update-medical-points/{medicalPoint}', 'update');
+        Route::delete('delete-medical-points/{medicalPoint}', 'destroy');
+    });
+
+    /**
+     * Doctor Management Routes
+     *
+     * These routes handle Doctor management operations.
+     */
+    Route::controller(DoctorController::class)->group(function () {
+        Route::post('create-doctors', 'store');
+        Route::put('update-doctors/{doctor}', 'update');
+        Route::delete('delete-doctors/{doctor}', 'destroy');
+    });
+
+    /**
+     * Application Setting Management Route
+     *
+     */
+    Route::put('admin/update-application-setting', [ApplicationSettingController::class, 'update']);
 });
-
-

@@ -26,18 +26,18 @@
             font-size: 16px;
             color: #666;
             line-height: 1.5;
+            font-weight: bold
         }
     </style>
 </head>
 <body>
     <div class="email-container">
-        <h3>Welcome to Our application</h3>
+        <h3>اهلاً بكم في تطبيقنا المتواضع </h3>
         <p>
-            Dear,<br>
             {{ $data['body'] }}
         </p>
         <p>
-            The RC syrian Team
+            فريق الهلال الاحمر السوري 
         </p>
     </div>
 </body>

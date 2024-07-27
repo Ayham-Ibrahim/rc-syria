@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
+use App\Http\Resources\MedicalPointResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class DoctorResource extends JsonResource
@@ -16,9 +17,9 @@ class DoctorResource extends JsonResource
     {
         return [
             'id'               => $this->id,
-            'medical_point_id' => $this->medical_point_id,
             'name'             => $this->name,
             'specialis'        => $this->specialis,
+            'medical_point_id' => new MedicalPointResource($this->medical_point),
         ];
     }
 }

@@ -1,13 +1,14 @@
 <?php
 
-namespace {{ namespace }};
+namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\UserInfo;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 
-class {{ class }} extends Model
+class Category extends Model
 {
     use HasFactory,SoftDeletes;
 
@@ -17,7 +18,7 @@ class {{ class }} extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        //
+        'name'
     ];
 
     /**
@@ -28,4 +29,13 @@ class {{ class }} extends Model
     protected $casts = [
         //
     ];
+
+    /**
+     * Get  user's information that they belong to the category
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function userInfos() {
+        return $this->hasMany(UserInfo::class);
+    }
 }

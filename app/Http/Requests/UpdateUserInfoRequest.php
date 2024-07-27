@@ -34,7 +34,6 @@ class UpdateUserInfoRequest extends FormRequest
             'address'=> 'nullable|string|min:2',
             'status'=> ['nullable',Rule::in(['متزوج','أعزب'])],
             'age'=> 'nullable|numeric',
-            'receiving_point_id'=> 'nullable|integer|exists:receiving_points,id',
             'category_id'=> 'nullable|integer|exists:categories,id',
         ];
     }

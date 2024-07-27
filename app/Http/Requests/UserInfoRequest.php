@@ -34,7 +34,6 @@ class UserInfoRequest extends FormRequest
             'address'=> 'required|string|min:2',
             'status'=> ['required',Rule::in(['متزوج','أعزب'])],
             'age'=> 'required|numeric',
-            'receiving_point_id'=> 'required|integer|exists:receiving_points,id',
             'category_id'=> 'required|integer|exists:categories,id',
         ];
     }

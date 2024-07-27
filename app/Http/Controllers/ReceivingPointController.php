@@ -84,10 +84,10 @@ class ReceivingPointController extends Controller
         // Validate the request data
         $data = $request->validated();
 
-        // Update the userInfo with the validated data
+        // Update the receiving Point with the validated data
         $receivingPoint = $this->receivingPointService->updateReceivingPoint($data, $receivingPoint);
 
-        // Return a success response with the created userInfo data
+        // Return a success response with the created receiving Point data
         return $this->successResponse(new ReceivingPointResource($receivingPoint),'receiving point updated successfully',200);
     }
 
@@ -99,7 +99,7 @@ class ReceivingPointController extends Controller
      */
     public function destroy(ReceivingPoint $receivingPoint)
     {
-        // Delete the userInfo by its ID
+        // Delete the receivingPoint by its ID
         $this->receivingPointService->deleteReceivingPoint($receivingPoint);
 
         // Return a success response indicating the author was deleted

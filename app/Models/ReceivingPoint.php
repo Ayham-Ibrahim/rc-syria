@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\UserInfo;
+use App\Models\ReceivingSchedule;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -32,12 +33,13 @@ class ReceivingPoint extends Model
         //
     ];
 
-    // /**
-    //  * Get  userInfo of users that they belong to the receiving Points
-    //  * 
-    //  * @return \Illuminate\Database\Eloquent\Relations\HasMany
-    //  */
-    // public function userInfos() {
-    //     return $this->hasMany(UserInfo::class);
-    // }
+    /**
+     * Get  receivingSchedules of users that they belong to the receiving Point
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function receivingSchedules()
+    {
+        return $this->hasMany(ReceivingSchedule::class);
+    }
 }

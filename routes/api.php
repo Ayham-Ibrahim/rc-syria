@@ -1,16 +1,17 @@
 <?php
 
-use App\Http\Controllers\ApplicationSettingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DoctorController;
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserInfoController;
-use App\Http\Controllers\ReceivingPointController;
-
-use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\MedicalPointController;
+
+use App\Http\Controllers\ReceivingPointController;
+use App\Http\Controllers\ReceivingScheduleController;
+use App\Http\Controllers\ApplicationSettingController;
 
 
 /*
@@ -84,8 +85,6 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
 
-
-
     /**
      * Medical Point Management Routes
      *
@@ -104,6 +103,15 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::controller(DoctorController::class)->group(function () {
         Route::get('get-all-doctors', 'index');
         Route::get('get-doctors/{doctor}', 'show');
+    });
+
+    /**
+     *  receiving schedule Management Routes
+     *
+     * These routes handle receiving schedule management operations(show).
+     */
+    Route::controller(ReceivingScheduleController::class)->group(function () {
+        Route::get('get-receiving-schedule/{receivingSchedule}', 'show');
     });
 
     /**
@@ -154,6 +162,7 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
         Route::delete('delete-category/{category}', 'destroy');
     });
 
+
      /**
      * Medical Point Management Routes
      *
@@ -175,6 +184,21 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
         Route::put('update-doctors/{doctor}', 'update');
         Route::delete('delete-doctors/{doctor}', 'destroy');
     });
+
+    /**
+     *  receiving schedule Management Routes
+     *
+     * These routes handle receiving schedule management operations(create,update,delete,list).
+     */
+    Route::controller(ReceivingScheduleController::class)->group(function () {
+        Route::post('create-receiving-schedule', 'store');
+        Route::put('update-receiving-schedule/{receivingSchedule}', 'update');
+        Route::delete('delete-receiving-schedule/{receivingSchedule}', 'destroy');
+        Route::get('get-receiving-schedules', 'index');
+    });
+
+
+
 
     /**
      * Application Setting Management Route

@@ -162,6 +162,7 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
         Route::delete('delete-category/{category}', 'destroy');
     });
 
+
     /**
      * Medical Point Management Routes
      *

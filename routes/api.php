@@ -163,7 +163,7 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     });
 
 
-     /**
+    /**
      * Medical Point Management Routes
      *
      * These routes handle Medical Point management operations.

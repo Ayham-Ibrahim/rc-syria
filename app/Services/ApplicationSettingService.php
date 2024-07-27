@@ -59,7 +59,13 @@ class ApplicationSettingService
             $application_setting = ApplicationSetting::first();
 
             $application_setting->name        = $field_inputs['name'] ?? $application_setting->name;
-            $application_setting->logo        = $this->fileExists($field_inputs['logo'], $application_setting->logo, 'ApplicationSetting') ?? $application_setting->logo;
+            if (array_key_exists('logo', $field_inputs)) {
+                $filePath = public_path($application_setting->logo);
+                if (file_exists($filePath)) {
+                    unlink($filePath);
+                }
+                $application_setting->logo = $this->storeFile($field_inputs['logo'], 'ApplicationSetting');
+            }
             $application_setting->description = $field_inputs['description'] ?? $application_setting->description;
             $application_setting->facebook    = $field_inputs['facebook'] ?? $application_setting->facebook;
             $application_setting->youtube     = $field_inputs['youtube'] ?? $application_setting->youtube;
@@ -85,4 +91,5 @@ class ApplicationSettingService
 
         return $result;
     }
+
 }

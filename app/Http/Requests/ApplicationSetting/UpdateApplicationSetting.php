@@ -28,7 +28,7 @@ class UpdateApplicationSetting extends FormRequest
     {
         return [
             'name'        => 'nullable|string|min:2|max:50',
-            'logo'        => 'required|file|image|mimes:png,jpg,jpeg,jfif|max:10000|mimetypes:image/jpeg,image/png,image/jpg,image/jfif',
+            'logo'        => 'nullable|file|image|mimes:png,jpg,jpeg,jfif|max:10000|mimetypes:image/jpeg,image/png,image/jpg,image/jfif',
             'description' => 'nullable|string|min:10',
             'facebook'    => 'nullable|active_url',
             'youtube'     => 'nullable|active_url',

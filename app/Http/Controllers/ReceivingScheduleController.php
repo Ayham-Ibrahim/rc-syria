@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\ReceivingSchedule;
 use Illuminate\Http\JsonResponse;
@@ -48,6 +49,8 @@ class ReceivingScheduleController extends Controller
      */
     public function store(ReceivingScheduleRequest $request)
     {
+        dd(Carbon::now());
+        
         // Validate the request data
         $data = $request->validated();
         // Create a new receiving Schedules with the validated data

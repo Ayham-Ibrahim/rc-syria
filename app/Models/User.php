@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\UserInfo;
+use App\Models\ReceivingSchedule;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -51,6 +52,15 @@ class User extends Authenticatable
      */
     public function userInfo(){
         return $this->hasOne(UserInfo::class);
+    }
+    /**
+     * Get the receiving schedual time associated with the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function receivingSchedule()
+    {
+        return $this->hasOne(ReceivingSchedule::class);
     }
 
 }

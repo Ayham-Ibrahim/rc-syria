@@ -2,12 +2,15 @@
 
 namespace App\Http\Requests\ApplicationSetting;
 
+use App\Http\Traits\ApiResponseTrait;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class UpdateApplicationSetting extends FormRequest
 {
+    use ApiResponseTrait;
+
     /**
      * Determine if the user is authorized to make this request.
      */

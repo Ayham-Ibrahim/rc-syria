@@ -26,7 +26,6 @@ class UserInfoResource extends JsonResource
             'status'            => $this->status,
             'age'               => $this->age,
             'user'              => new UserResource($this->user),
-            'receiving_point'   => new ReceivingPointResource($this->receivingPoint),
             'category'           => new CategoryResource($this->category),
         ];
     }

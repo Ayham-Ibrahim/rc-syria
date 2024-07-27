@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Requests\Doctor;
+namespace App\Http\Requests\ReceivingSchedule;
 
-use App\Http\Traits\ApiResponseTrait;
 use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Traits\ApiResponseTrait;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class UpdateDoctorRequest extends FormRequest
+class ReceivingScheduleRequest extends FormRequest
 {
     use ApiResponseTrait;
 
@@ -27,13 +27,13 @@ class UpdateDoctorRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'medical_point_id' => 'nullable|integer|exists:medical_points,id',
-            'name'             => 'nullable|string|min:2|max:50',
-            'specialis'        => 'nullable|string|min:2|max:100'
+            'user_id' => 'required|exists:users,id',
+            'receiving_point_id' => 'required|exists:receiving_points,id',
+            'receiving_time' => 'required|date_format:Y/m/d H:i:s',
         ];
     }
 
-    /**
+       /**
      *  method handles failure of Validation and return message
      * @param \Illuminate\Contracts\Validation\Validator $Validator
      * @throws \Illuminate\Http\Exceptions\HttpResponseException

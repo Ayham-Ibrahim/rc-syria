@@ -4,44 +4,72 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Services\AuthService;
+use Illuminate\Http\JsonResponse;
+use App\Http\Requests\LoginRequest;
 use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Traits\ApiResponseTrait;
+use App\Http\Requests\RegisterRequest;
 
 class AuthController extends Controller
 {
+    /**
+     * @var AuthService
+     */
+    protected $authService;
     use ApiResponseTrait;
-    public function register(Request $request){
-        $post_data = $request->validate([
-            'email'=>'required|string|email|unique:users',
-            'password'=>'required|min:8'
-        ]);
+    
+    /**
+     * AuthController constructor.
+     *
+     * @param AuthService $authService
+     */
+    public function __construct(AuthService $authService){
+        $this->authService = $authService;
+    }
 
-        $user = User::create([
-            'email' => $post_data['email'],
-            'password' => Hash::make($post_data['password']),
-        ]);
 
-        $token = $user->createToken('authToken')->plainTextToken;
+    /**
+     * Register a new user.
+     *
+     * @param RegisterRequest $request
+     * @return JsonResponse
+     */
+    public function register(RegisterRequest $request){
 
-        return $this->apiResponse(new UserResource($user),$token,'registered successfully',200);
+        $data = $request->validated();
+        $response = $this->authService->register($data);
+        return $this->apiResponse(new UserResource($response['user']),$response['token'],'registered successfully',200);
 
     }
 
-    public function login(Request $request){
-        if (!Auth::attempt($request->only('email', 'password'))) {
-            return response()->json([
-                'message' => 'Invalid login details'
-            ], 401);
-        }
+     /**
+     * Login a user.
+     *
+     * @param LoginRequest $request
+     * @return JsonResponse
+     */
+    public function login(LoginRequest $request){
 
-        $user = User::where('email', $request['email'])->firstOrFail();
+        $credentials = $request->validated();
+        $response = $this->authService->login($credentials);
+        return $this->apiResponse(new UserResource($response['user']),$response['token'],'logged in successfully',200);
 
-        $token = $user->createToken('authToken')->plainTextToken;
+    }
 
-        return $this->apiResponse(new UserResource($user),$token,'registered successfully',200);
-
+    /**
+     * logout a user.
+     *
+     * @return JsonResponse
+     */
+    public function logout(Request $request)
+    {
+        $request->user()->tokens()->delete();
+        return response()->json([
+            'message' => 'Successfully logged out'
+        ]);
     }
 
 }

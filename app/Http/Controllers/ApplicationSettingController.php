@@ -9,6 +9,12 @@ use App\Models\ApplicationSetting;
 use App\services\ApplicationSettingService;
 use Illuminate\Http\Request;
 
+/**
+ * @SWG\Tag(
+ *     name="Application Settings",
+ *     description="Manage application settings"
+ * )
+ */
 class ApplicationSettingController extends Controller
 {
     use ApiResponseTrait;
@@ -29,7 +35,13 @@ class ApplicationSettingController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * @SWG\Get(
+     *     path="/api/get-application-setting",
+     *     summary="Get application settings",
+     *     tags={"Application Settings"},
+     *     @SWG\Response(response=200, description="Successful operation", @SWG\Schema(ref="#/definitions/ApplicationSettingResource")),
+     *     @SWG\Response(response=400, description="Invalid request")
+     * )
      */
     public function show()
     {
@@ -40,7 +52,18 @@ class ApplicationSettingController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * @SWG\Put(
+     *     path="/api/admin/update-application-setting",
+     *     summary="Update application settings",
+     *     tags={"Application Settings"},
+     *     @SWG\Parameter(
+     *         name="body",
+     *         in="body",
+     *         @SWG\Schema(ref="#/definitions/UpdateApplicationSetting")
+     *     ),
+     *     @SWG\Response(response=200, description="Successful operation", @SWG\Schema(ref="#/definitions/ApplicationSettingResource")),
+     *     @SWG\Response(response=400, description="Invalid request")
+     * )
      */
     public function update(UpdateApplicationSetting $request)
     {
@@ -51,5 +74,4 @@ class ApplicationSettingController extends Controller
 
         return $this->successResponse($output['data'], $output['message'], $output['status']);
     }
-
 }

@@ -30,7 +30,13 @@ class MedicalPointController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * @SWG\Get(
+     *     path="/api/get-all-medical-points",
+     *     summary="Get a list of medical points",
+     *     tags={"Medical Points"},
+     *     @SWG\Response(response=200, description="Successful operation"),
+     *     @SWG\Response(response=400, description="Invalid request")
+     * )
      */
     public function index()
     {
@@ -41,7 +47,20 @@ class MedicalPointController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * @SWG\Post(
+     *     path="/api/create-medical-points",
+     *     summary="Create a new medical point",
+     *     tags={"Medical Points"},
+     *     @SWG\Parameter(
+     *         name="body",
+     *         in="body",
+     *         description="Medical point data",
+     *         required=true,
+     *         @SWG\Schema(ref="#/definitions/StoreMedicalPointRequest")
+     *     ),
+     *     @SWG\Response(response=200, description="Successful operation"),
+     *     @SWG\Response(response=400, description="Invalid request")
+     * )
      */
     public function store(StoreMedicalPointRequest $request)
     {
@@ -54,7 +73,20 @@ class MedicalPointController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * @SWG\Get(
+     *     path="/api/get-medical-points/{medicalPoint}",
+     *     summary="Get a medical point",
+     *     tags={"Medical Points"},
+     *     @SWG\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="Medical point ID",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Response(response=200, description="Successful operation"),
+     *     @SWG\Response(response=400, description="Invalid request")
+     * )
      */
     public function show(MedicalPoint $medicalPoint)
     {
@@ -63,7 +95,27 @@ class MedicalPointController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * @SWG\Put(
+     *     path="/api/update-medical-points/{medicalPoint}",
+     *     summary="Update a medical point",
+     *     tags={"Medical Points"},
+     *     @SWG\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="Medical point ID",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="body",
+     *         in="body",
+     *         description="Medical point data",
+     *         required=true,
+     *         @SWG\Schema(ref="#/definitions/UpdateMedicalPointRequest")
+     *     ),
+     *     @SWG\Response(response=200, description="Successful operation"),
+     *     @SWG\Response(response=400, description="Invalid request")
+     * )
      */
     public function update(UpdateMedicalPointRequest $request, MedicalPoint $medicalPoint)
     {
@@ -76,7 +128,20 @@ class MedicalPointController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * @SWG\Delete(
+     *     path="/api/delete-medical-points/{medicalPoint}",
+     *     summary="Delete a medical point",
+     *     tags={"Medical Points"},
+     *     @SWG\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="Medical point ID",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Response(response=200, description="Successful operation"),
+     *     @SWG\Response(response=400, description="Invalid request")
+     * )
      */
     public function destroy(MedicalPoint $medicalPoint)
     {

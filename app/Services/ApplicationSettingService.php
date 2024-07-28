@@ -91,4 +91,5 @@ class ApplicationSettingService
 
         return $result;
     }
+
 }

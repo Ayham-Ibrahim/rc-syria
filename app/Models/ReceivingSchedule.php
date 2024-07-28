@@ -24,6 +24,10 @@ class ReceivingSchedule extends Model
         'receiving_time',
     ];
 
+    protected $dates = [
+        'receiving_time',
+    ];
+
     /**
      * The attributes that should be cast.
      *

@@ -19,7 +19,7 @@ class AuthService
 
         // prepare message
         $data['email'] = $user->email;
-        $data['body']  = "Thank you for joining with us";
+        $data['body']  = "شكرا لكم لانضمامكم الينا وكونكم جزءاً من عائلتنا ";
         // send mail to user
         Mail::send('emails.notification', ['data' => $data], function ($message) use ($data) {
             $message->to($data['email'])->subject($data['body']);

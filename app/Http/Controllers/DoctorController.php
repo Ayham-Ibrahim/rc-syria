@@ -7,7 +7,7 @@ use App\Http\Requests\Doctor\UpdateDoctorRequest;
 use App\Http\Resources\DoctorResource;
 use App\Http\Traits\ApiResponseTrait;
 use App\Models\Doctor;
-use App\services\DoctorService;
+use App\Services\DoctorService;
 use Illuminate\Http\Request;
 
 class DoctorController extends Controller

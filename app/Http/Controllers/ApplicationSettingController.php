@@ -6,7 +6,7 @@ use App\Http\Requests\ApplicationSetting\UpdateApplicationSetting;
 use App\Http\Resources\ApplicationSettingResource;
 use App\Http\Traits\ApiResponseTrait;
 use App\Models\ApplicationSetting;
-use App\services\ApplicationSettingService;
+use App\Services\ApplicationSettingService;
 use Illuminate\Http\Request;
 
 class ApplicationSettingController extends Controller

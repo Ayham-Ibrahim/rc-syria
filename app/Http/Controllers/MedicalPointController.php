@@ -7,7 +7,7 @@ use App\Http\Requests\MedicalPoint\UpdateMedicalPointRequest;
 use App\Http\Resources\MedicalPointResource;
 use App\Http\Traits\ApiResponseTrait;
 use App\Models\MedicalPoint;
-use App\services\MedicalPointService;
+use App\Services\MedicalPointService;
 use Illuminate\Http\Request;
 
 class MedicalPointController extends Controller
